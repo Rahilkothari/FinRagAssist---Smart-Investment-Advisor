@@ -1,2 +1,217 @@
-# FinRagAssist-Smart-Investment-Advisor
-FinRagAssist helps users understand their investment risk level, get portfolio recommendations, analyze stocks, and compare companies. It uses ML (XGBoost), yfinance, ChromaDB, and GPT-based explanations, all wrapped inside a clean Gradio interface.
+# **FinRagAssist — Smart Investment Advisor**
+
+A unified **Financial Intelligence System** that blends **ML-powered risk profiling**, **AI-enhanced stock analysis**, and **RAG-based market research** into a single Gradio app.
+
+FinRagAssist helps users:
+
+* Understand their **risk category** (High / Medium / Low)
+* Receive **portfolio allocation guidance**
+* View **5-year investment projections**
+* Analyze **technical indicators** (SMA, EMA, RSI, MACD) for any stock
+* Compare two stocks using **RAG + 3-Year metrics + Pros/Cons + Final Verdict**
+
+This project integrates **XGBoost**, **OpenAI (GPT-4o-mini)**, **ChromaDB**, and **yfinance**, wrapped inside a clean Gradio UI.
+
+## 🚀 **Features**
+
+### 🧠 **1. ML-Based Risk Profiler (XGBoost)**
+
+* Inputs: Age Group, Income Group, Loan Status, Employment Status, Investment Goal, Investment Amount
+* Outputs:
+
+  * Risk Tolerance (High / Medium / Low)
+  * Confidence Score
+  * Suggested portfolio allocation
+  * 5-Year projected value
+  * Pie chart + line chart visualization
+
+### 📈 **2. Stock Analysis with Technical Indicators**
+
+For any Indian or global stock (INFY, TCS, HDFCBANK, AAPL, TSLA, etc.):
+
+* Clean NSE ticker correction (`HDFCBANK` → `HDFCBANK.NS`)
+* Technicals computed:
+
+  * **SMA-20 / EMA-20**
+  * **RSI-14**
+  * **MACD + Signal**
+* Auto-generated “Chart Note” summary using GPT
+* Price + indicator plots
+
+### 🔍 **3. RAG-Powered Market Research**
+
+Uses **ChromaDB + sentence-transformers** to retrieve relevant stock snippets.
+If not found, it **fetches fresh yfinance data**, embeds it, and stores it permanently.
+
+### 🆚 **4. Stock Comparison Engine**
+
+Given two tickers (INFY vs TCS):
+
+* RAG summaries for each
+* Auto-cleaned 3-year history
+* Key metrics:
+
+  * 1-year return
+  * 3-year return
+  * Volatility
+  * Sharpe-like score
+  * Drawdowns
+* GPT-based Pros & Cons
+* Final Verdict for **conservative investors**
+
+## 🧱 **Architecture**
+
+```
+                            ┌────────────────────────┐
+                            │        User UI         │
+                            │       (Gradio)         │
+                            └──────────┬─────────────┘
+                                       │
+             ┌─────────────────────────┼─────────────────────────┐
+             │                         │                         │
+     ┌───────▼────────┐       ┌────────▼─────────┐      ┌────────▼──────────┐
+     │ Risk Profiler   │       │ Stock Analyzer    │      │ Stock Comparator  │
+     │ (XGBoost)       │       │ (Tech Indicators) │      │ (RAG + Metrics)   │
+     └───────┬────────┘       └────────┬──────────┘      └────────┬──────────┘
+             │                         │                         │
+     ┌───────▼────────┐       ┌────────▼─────────┐      ┌────────▼──────────┐
+     │ Preprocessing   │       │ yfinance Fetcher │      │ RAG Retrieval      │
+     │ (Scaling/Enc)   │       └────────┬──────────┘      └────────┬──────────┘
+     └───────┬────────┘                 │                         │
+             │                    ┌─────▼─────┐             ┌──────▼─────┐
+             │                    │ Indicators │             │ ChromaDB    │
+             │                    └────────────┘             └─────────────┘
+             │                         │                         │
+     ┌───────▼────────┐       ┌────────▼─────────┐      ┌────────▼──────────┐
+     │   Output ML    │       │ Charts (matplotlib│      │ GPT Explanations  │
+     └────────────────┘       └───────────────────┘      └───────────────────┘
+```
+
+## 🛠 **Tech Stack**
+
+| Component         | Technology                               |
+| ----------------- | ---------------------------------------- |
+| ML Model          | **XGBoost Classifier**                   |
+| Embeddings        | **sentence-transformers (MiniLM-L6-v2)** |
+| Vector DB         | **ChromaDB (Persistent)**                |
+| LLM               | **GPT-4o-mini (OpenAI)**                 |
+| Market Data       | **yfinance**                             |
+| UI                | **Gradio**                               |
+| Charts            | **matplotlib**                           |
+| Data Processing   | **Pandas, NumPy**                        |
+| Model Persistence | **joblib**                               |
+
+
+## 📦 Installation
+
+### **1. Clone repo**
+
+```bash
+git clone https://github.com/<your-username>/FinRagAssist.git
+cd FinRagAssist
+```
+
+### **2. Install dependencies**
+
+```bash
+pip install -r requirements.txt
+```
+
+### **3. Add `.env` file**
+
+Create:
+
+```
+OPENAI_API_KEY=your_key
+TAVILY_API_KEY=optional
+```
+
+## 📂 Project Structure
+
+```
+FinRagAssist/
+│── app.py
+│── README.md
+│── cleaned_data_final.csv
+│── xgb_risk_model.joblib
+│── chroma_db/
+│── models/
+│── prompts/
+│── utils/
+│── requirements.txt
+```
+
+## 🧪 Training the Risk Model
+
+The XGBoost classifier uses a **simplified engineered feature set**:
+
+```
+AgeGroup  
+IncomeGroup  
+EmploymentStatus  
+LoanStatus  
+InvestmentGoal  
+InvestmentAmount
+```
+
+To retrain:
+
+```python
+from finragassist_blocks import train_xgb_model, load_data
+
+df = load_data()
+train_xgb_model(df)
+```
+
+The model will automatically:
+
+-Clean and normalize user inputs
+-Encode categorical values
+-Scale numerical features
+-Train using a robust XGBoost pipeline
+-Save the trained model bundle to disk for inference
+
+
+## ▶️ Running the App
+
+```bash
+python app.py
+```
+
+Gradio UI launches at:
+
+```
+http://127.0.0.1:7860
+```
+
+## 📸 Screenshots
+
+(Replace with actual images)
+
+```
+<img width="1892" height="566" alt="Screenshot 2025-11-22 193248" src="https://github.com/user-attachments/assets/57e1e68e-439c-46f8-9219-8174aeaa4e8d" />
+<img width="913" height="953" alt="Screenshot 2025-11-22 193302" src="https://github.com/user-attachments/assets/e58b47ba-a146-466b-849f-b3098fce28ab" />
+<img width="1884" height="819" alt="Screenshot 2025-11-22 195159" src="https://github.com/user-attachments/assets/033e78d8-d329-4be2-adbf-0bff067b648a" />
+<img width="996" height="994" alt="Screenshot 2025-11-22 195218" src="https://github.com/user-attachments/assets/de872464-cbfc-402b-9fec-17d09e2fa5d8" />
+<img width="1883" height="575" alt="Screenshot 2025-11-22 195255" src="https://github.com/user-attachments/assets/5341134f-075d-4165-9ce6-a32a27d33208" />
+<img width="1895" height="1021" alt="Screenshot 2025-11-22 195313" src="https://github.com/user-attachments/assets/8886d854-6667-48e1-893f-e801c335bee8" />
+
+```
+
+## 🔮 Future Improvements
+
+* Add live NSE news using news APIs
+* Add Python backtesting engine
+* Export PDF report of recommendations
+* Add user authentication + personalization
+
+## 📝 License
+
+MIT License. Free for personal & commercial use.
+
+## 🙌 Acknowledgements
+
+* OpenAI for GPT models
+* ChromaDB for vector storage
+* yfinance for stock history
+* Gradio for fast UI prototyping
