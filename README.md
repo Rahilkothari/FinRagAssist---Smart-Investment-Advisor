@@ -190,17 +190,17 @@ http://127.0.0.1:7860
 ## 📸 Screenshots
 
 ### 🔹 Risk Profiler
-<img width="900" src="LINK1" />
-
-### 🔹 Stock Analysis
-<img width="900" src="LINK2" />
+<img width="1892" height="566" alt="Image" src="https://github.com/user-attachments/assets/4577b195-bc4d-4dfc-9010-ecf83e976183" />
+<img width="913" height="953" alt="Image" src="https://github.com/user-attachments/assets/28d7b0c9-22ae-4fe4-8cad-0804118660b2" />
 
 ### 🔹 Technical Charts
-<img width="900" src="LINK3" />
+<img width="1884" height="819" alt="Image" src="https://github.com/user-attachments/assets/900ca8d4-1cd8-4537-a37c-0d4e5851867c" />
+<img width="996" height="994" alt="Image" src="https://github.com/user-attachments/assets/1182414b-d30a-4682-a645-538514559d55" />
+
 
 ### 🔹 Stock Comparison
-<img width="900" src="LINK4" />
-
+<img width="1883" height="575" alt="Image" src="https://github.com/user-attachments/assets/cfa12a08-069d-481e-942b-07031b877f41" />
+<img width="1895" height="1021" alt="Image" src="https://github.com/user-attachments/assets/6c2ff44e-29d3-433f-8e6a-130266ff315e" />
 
 ```
 
