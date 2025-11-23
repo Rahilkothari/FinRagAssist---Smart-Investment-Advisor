@@ -1,4 +1,4 @@
-# **FinRagAssist — Smart Investment Advisor**
+# **FinRagAssist - Smart Investment Advisor**
 
 A unified **Financial Intelligence System** that blends **ML-powered risk profiling**, **AI-enhanced stock analysis**, and **RAG-based market research** into a single Gradio app.
 
