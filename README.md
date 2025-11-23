@@ -129,16 +129,14 @@ TAVILY_API_KEY=optional
 ## 📂 Project Structure
 
 ```
+
 FinRagAssist/
-│── app.py
 │── README.md
+│── requirements.txt
 │── cleaned_data_final.csv
 │── xgb_risk_model.joblib
-│── chroma_db/
-│── models/
-│── prompts/
-│── utils/
-│── requirements.txt
+│── FinRagAssist_Notebook.ipynb
+
 ```
 
 ## 🧪 Training the Risk Model
@@ -171,15 +169,14 @@ The model will automatically:
 -Train using a robust XGBoost pipeline
 -Save the trained model bundle to disk for inference
 
-
 ## ▶️ Running the App
 
 ```bash
-python app.py
+jupyter notebook
 ```
+Open the main notebook and run all cells.
 
-Gradio UI launches at:
-
+Once the Gradio UI cell executes, the application will launch at:
 ```
 http://127.0.0.1:7860
 ```
