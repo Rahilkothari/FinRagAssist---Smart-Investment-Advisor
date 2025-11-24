@@ -196,7 +196,8 @@ http://127.0.0.1:7860
 
 ### 🔹 Stock Comparison
 <img width="1883" height="575" alt="Screenshot 2025-11-22 195255" src="https://github.com/user-attachments/assets/e08e53f7-629f-4023-8607-d8cd6a1e004f" />
-<img width="1895" height="1021" alt="Screenshot 2025-11-22 195313" src="https://github.com/user-attachments/assets/310ee340-6b7e-41bd-ae6c-98b30cd710a0" />
+<img width="1045" height="992" alt="Screenshot 2025-11-22 195256" src="https://github.com/user-attachments/assets/b3e7f4ac-5f64-4d39-80d9-018a3ff49901" />
+
 
 ```
 
